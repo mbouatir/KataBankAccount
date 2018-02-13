@@ -18,7 +18,7 @@ import com.kata.bank.service.impl.AccountServiceImpl;
 public class StatementTest {
 
 	/** The account service impl. */
-	private AccountServiceImpl accountServiceImpl;
+	private AccountServiceImpl accountService;
 
 	/** The account. */
 	private Account account;
@@ -40,8 +40,8 @@ public class StatementTest {
 	public void init() {
 
 		final String codeAccount = "FR12354566266275";
-		account = new Account(LocalDate.now(), BigDecimal.ZERO, codeAccount);
-		accountServiceImpl = new AccountServiceImpl();
+		account = new Account(codeAccount,LocalDate.now(), BigDecimal.ZERO);
+		accountService = new AccountServiceImpl();
 	}
 
 	/**
@@ -55,10 +55,10 @@ public class StatementTest {
 		final BigDecimal moneyOfDeposit = BigDecimal.valueOf(100);
 		final LocalDate dateOfDeposit = LocalDate.parse("2018-02-01");
 
-		Account expectedAccount = accountServiceImpl.deposit(account, dateOfDeposit, moneyOfDeposit);
+		Account expectedAccount = accountService.deposit(account, dateOfDeposit, moneyOfDeposit);
 
 		Assert.assertNotNull(expectedAccount);
-		Assert.assertEquals(expectedAccount.getBalanceOfAccount(), BigDecimal.valueOf(100));
+		Assert.assertEquals(expectedAccount.getBalance(), BigDecimal.valueOf(100));
 		Assert.assertEquals(expectedAccount.getStatementRecords().get(0).getOperation().getDateOfOperation(),
 				dateOfDeposit);
 	
@@ -66,10 +66,10 @@ public class StatementTest {
 		final BigDecimal moneyToWithdrawn = BigDecimal.valueOf(50);
 		final LocalDate dateOfWithdrawn = LocalDate.parse("2017-02-01");
 
-		expectedAccount = accountServiceImpl.withdrawn(account, dateOfWithdrawn, moneyToWithdrawn);
+		expectedAccount = accountService.withdrawn(account, dateOfWithdrawn, moneyToWithdrawn);
 
 		Assert.assertNotNull(expectedAccount);
-		Assert.assertEquals(expectedAccount.getBalanceOfAccount(), BigDecimal.valueOf(50));
+		Assert.assertEquals(expectedAccount.getBalance(), BigDecimal.valueOf(50));
 		Assert.assertEquals(expectedAccount.getStatementRecords().get(1).getOperation().getDateOfOperation(),
 				dateOfWithdrawn);
 

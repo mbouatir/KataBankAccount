@@ -7,17 +7,20 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.kata.bank.exception.BankAccountException;
 import com.kata.bank.model.Account;
 import com.kata.bank.service.impl.AccountServiceImpl;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class AccountTest.
- *  @author Mohamed BOUATIRA
+ * 
+ * @author Mohamed BOUATIRA
  */
 public class AccountTest {
 
 	/** The account service impl. */
-	private AccountServiceImpl accountServiceImpl;
+	private AccountServiceImpl accountService;
 
 	/** The account. */
 	private Account account;
@@ -29,8 +32,8 @@ public class AccountTest {
 	public void init() {
 
 		final String codeAccount = "FR12354566266275";
-		account = new Account(LocalDate.now(), BigDecimal.ZERO, codeAccount);
-		accountServiceImpl = new AccountServiceImpl();
+		account = new Account(codeAccount, LocalDate.now(), BigDecimal.ZERO);
+		accountService = new AccountServiceImpl();
 	}
 
 	/**
@@ -41,9 +44,9 @@ public class AccountTest {
 
 		BigDecimal moneyOfDeposit = BigDecimal.valueOf(100);
 
-		Account expectedAccount = accountServiceImpl.deposit(account, LocalDate.now(), moneyOfDeposit);
+		Account expectedAccount = accountService.deposit(account, LocalDate.now(), moneyOfDeposit);
 
-		Assert.assertEquals(expectedAccount.getBalanceOfAccount(), BigDecimal.valueOf(100));
+		Assert.assertEquals(expectedAccount.getBalance(), BigDecimal.valueOf(100));
 
 	}
 
@@ -55,10 +58,10 @@ public class AccountTest {
 
 		BigDecimal moneyOfDeposit = BigDecimal.valueOf(100);
 		BigDecimal initialBalance = BigDecimal.valueOf(100);
-		account.setBalanceOfAccount(initialBalance);
+		account.setBalance(initialBalance);
 
-		Account expectedAccount = accountServiceImpl.deposit(account, LocalDate.now(), moneyOfDeposit);
-		Assert.assertEquals(expectedAccount.getBalanceOfAccount(), BigDecimal.valueOf(200));
+		Account expectedAccount = accountService.deposit(account, LocalDate.now(), moneyOfDeposit);
+		Assert.assertEquals(expectedAccount.getBalance(), BigDecimal.valueOf(200));
 
 	}
 
@@ -70,9 +73,9 @@ public class AccountTest {
 
 		BigDecimal moneyToWithdrawn = BigDecimal.valueOf(200);
 
-		Account expectedAccount = accountServiceImpl.withdrawn(account, LocalDate.now(), moneyToWithdrawn);
+		Account expectedAccount = accountService.withdrawn(account, LocalDate.now(), moneyToWithdrawn);
 		Assert.assertNotNull(expectedAccount);
-		Assert.assertEquals(expectedAccount.getBalanceOfAccount(), BigDecimal.valueOf(-200));
+		Assert.assertEquals(expectedAccount.getBalance(), BigDecimal.valueOf(-200));
 
 	}
 
@@ -85,11 +88,24 @@ public class AccountTest {
 		BigDecimal moneyOfDeposit = BigDecimal.valueOf(100);
 		BigDecimal moneyToWithdrawn = BigDecimal.valueOf(50);
 
-		Account expectedAccount = accountServiceImpl.deposit(account, LocalDate.now(), moneyOfDeposit);
+		Account expectedAccount = accountService.deposit(account, LocalDate.now(), moneyOfDeposit);
 		Assert.assertNotNull(expectedAccount);
 
-		expectedAccount = accountServiceImpl.withdrawn(account, LocalDate.now(), moneyToWithdrawn);
-		Assert.assertEquals(expectedAccount.getBalanceOfAccount(), BigDecimal.valueOf(50));
+		expectedAccount = accountService.withdrawn(account, LocalDate.now(), moneyToWithdrawn);
+		Assert.assertEquals(expectedAccount.getBalance(), BigDecimal.valueOf(50));
+
+	}
+
+	/**
+	 * Should return exception when i withdrawn 500 and the limit of withdrawn is 400 per day today.
+	 */
+	@Test(expected = BankAccountException.class)
+	public void should_return_exception_when_i_withdrawn_500_and_the_limit_of_withdrawn_is_400_per_day_today() {
+
+		BigDecimal moneyToWithdrawn = BigDecimal.valueOf(500);
+
+		Account expectedAccount = accountService.withdrawn(account, LocalDate.now(), moneyToWithdrawn);
+		Assert.assertNotNull(expectedAccount);
 
 	}
 }

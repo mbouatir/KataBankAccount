@@ -5,21 +5,20 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
- 
 /**
  * The Class Account that represents the account bank.
- *  @author Mohamed BOUATIRA
- *  
+ * 
+ * @author Mohamed BOUATIRA
+ * 
  */
 public class Account {
 
 	/** The date creation. */
 	private LocalDate dateCreation;
-	
+
 	/** The balance of account. */
-	private BigDecimal balanceOfAccount;
-	
+	private BigDecimal balance;
+
 	/** The code account. */
 	private String codeAccount;
 
@@ -29,14 +28,17 @@ public class Account {
 	/**
 	 * Instantiates a new account.
 	 *
-	 * @param dateCreation the date creation
-	 * @param balanceOfAccount the balance of account
-	 * @param codeAccount the code account
+	 * @param dateCreation
+	 *            the date creation
+	 * @param balanceOfAccount
+	 *            the balance of account
+	 * @param codeAccount
+	 *            the code account
 	 */
-	public Account(LocalDate dateCreation, BigDecimal balanceOfAccount, String codeAccount) {
+	public Account(String codeAccount, LocalDate dateCreation, BigDecimal balanceOfAccount) {
 		super();
 		this.dateCreation = dateCreation;
-		this.balanceOfAccount = balanceOfAccount;
+		this.balance = balanceOfAccount;
 		this.codeAccount = codeAccount;
 	}
 
@@ -52,7 +54,8 @@ public class Account {
 	/**
 	 * Sets the date creation.
 	 *
-	 * @param dateCreation the new date creation
+	 * @param dateCreation
+	 *            the new date creation
 	 */
 	public void setDateCreation(LocalDate dateCreation) {
 		this.dateCreation = dateCreation;
@@ -63,17 +66,18 @@ public class Account {
 	 *
 	 * @return the balance of account
 	 */
-	public BigDecimal getBalanceOfAccount() {
-		return balanceOfAccount;
+	public BigDecimal getBalance() {
+		return balance;
 	}
 
 	/**
 	 * Sets the balance of account.
 	 *
-	 * @param balanceOfAccount the new balance of account
+	 * @param balanceOfAccount
+	 *            the new balance of account
 	 */
-	public void setBalanceOfAccount(BigDecimal balanceOfAccount) {
-		this.balanceOfAccount = balanceOfAccount;
+	public void setBalance(BigDecimal balanceOfAccount) {
+		this.balance = balanceOfAccount;
 	}
 
 	/**
@@ -88,7 +92,8 @@ public class Account {
 	/**
 	 * Sets the code account.
 	 *
-	 * @param codeAccount the new code account
+	 * @param codeAccount
+	 *            the new code account
 	 */
 	public void setCodeAccount(String codeAccount) {
 		this.codeAccount = codeAccount;
@@ -106,7 +111,8 @@ public class Account {
 	/**
 	 * Sets the statement records.
 	 *
-	 * @param statementRecords the new statement records
+	 * @param statementRecords
+	 *            the new statement records
 	 */
 	public void setStatementRecords(List<StatementRecord> statementRecords) {
 		this.statementRecords = statementRecords;
