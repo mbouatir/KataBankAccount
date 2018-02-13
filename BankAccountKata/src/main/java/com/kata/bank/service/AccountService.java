@@ -3,7 +3,7 @@ package com.kata.bank.service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import com.kata.bank.model.Account;
+import com.kata.bank.model.account.Account;
 
  
 /**

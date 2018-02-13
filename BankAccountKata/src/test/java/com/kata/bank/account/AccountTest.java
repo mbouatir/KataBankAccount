@@ -1,4 +1,4 @@
-package com.kata.bank;
+package com.kata.bank.account;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -8,10 +8,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.kata.bank.exception.BankAccountException;
-import com.kata.bank.model.Account;
+import com.kata.bank.model.account.Account;
+import com.kata.bank.service.AccountService;
 import com.kata.bank.service.impl.AccountServiceImpl;
 
-// TODO: Auto-generated Javadoc
+ 
 /**
  * The Class AccountTest.
  * 
@@ -19,8 +20,8 @@ import com.kata.bank.service.impl.AccountServiceImpl;
  */
 public class AccountTest {
 
-	/** The account service impl. */
-	private AccountServiceImpl accountService;
+	/** The account service. */
+	private AccountService accountService;
 
 	/** The account. */
 	private Account account;
@@ -33,7 +34,7 @@ public class AccountTest {
 
 		final String codeAccount = "FR12354566266275";
 		account = new Account(codeAccount, LocalDate.now(), BigDecimal.ZERO);
-		accountService = new AccountServiceImpl();
+		accountService=new AccountServiceImpl();
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package com.kata.bank.model;
+package com.kata.bank.model.operation;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -17,8 +17,8 @@ public class WithdrawnOperation extends Operation {
 	 * @param typeOperation the type operation
 	 * @param dateOfOperation the date of operation
 	 */
-	public WithdrawnOperation(BigDecimal amountOfMoney, TypeOperation typeOperation, LocalDate dateOfOperation) {
-		super(amountOfMoney, typeOperation, dateOfOperation);
+	public WithdrawnOperation(BigDecimal amountOfMoney, LocalDate dateOfOperation) {
+		super(amountOfMoney, TypeOperation.WITHDRAWN, dateOfOperation);
 
 	}
 

@@ -1,6 +1,8 @@
-package com.kata.bank.model;
+package com.kata.bank.model.statement;
 
 import java.util.List;
+
+import com.kata.bank.model.account.Account;
 
 /**
  * The Class Statement represents the statement bank.

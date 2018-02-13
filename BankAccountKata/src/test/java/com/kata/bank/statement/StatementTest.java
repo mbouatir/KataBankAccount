@@ -1,4 +1,4 @@
-package com.kata.bank;
+package com.kata.bank.statement;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -7,31 +7,32 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.kata.bank.model.Account;
-import com.kata.bank.model.Statement;
+import com.kata.bank.model.account.Account;
+import com.kata.bank.model.statement.Statement;
+import com.kata.bank.service.AccountService;
 import com.kata.bank.service.impl.AccountServiceImpl;
 
 /**
  * The Class StatementTest.
- *  @author Mohamed BOUATIRA
+ * 
+ * @author Mohamed BOUATIRA
  */
 public class StatementTest {
 
-	/** The account service impl. */
-	private AccountServiceImpl accountService;
+	/** The account service . */
+	private AccountService	 accountService;
 
 	/** The account. */
 	private Account account;
 
-	/** The  EXPECTED_STATEMENT. */
-	private static final String EXPECTED_STATEMENT =
-			"-----------------------------------------------------------------------------------------------------------------------------------------\n"
-			+" Operation           |                           Date                         |     Amount                         |    Balance         |\n"
-			+"-----------------------------------------------------------------------------------------------------------------------------------------\n"
-			+"   DEPOSIT           |                     2018-02-01                         |       +100                         |        100         |\n"
-			+" WITHDRAWN           |                     2017-02-01                         |        -50                         |         50         |\n"
-			+"-----------------------------------------------------------------------------------------------------------------------------------------\n";
-
+	/** The EXPECTED_STATEMENT. */
+	private static final String EXPECTED_STATEMENT = 
+			  "-----------------------------------------------------------------------------------------------------------------------------------------\n"
+			+ " Operation           |                           Date                         |     Amount                         |    Balance         |\n"
+			+ "-----------------------------------------------------------------------------------------------------------------------------------------\n"
+			+ "   DEPOSIT           |                     2018-02-01                         |       +100                         |        100         |\n"
+			+ " WITHDRAWN           |                     2017-02-01                         |        -50                         |         50         |\n"
+			+ "-----------------------------------------------------------------------------------------------------------------------------------------\n";
 
 	/**
 	 * Inits the test.
@@ -40,7 +41,7 @@ public class StatementTest {
 	public void init() {
 
 		final String codeAccount = "FR12354566266275";
-		account = new Account(codeAccount,LocalDate.now(), BigDecimal.ZERO);
+		account = new Account(codeAccount, LocalDate.now(), BigDecimal.ZERO);
 		accountService = new AccountServiceImpl();
 	}
 
@@ -61,7 +62,6 @@ public class StatementTest {
 		Assert.assertEquals(expectedAccount.getBalance(), BigDecimal.valueOf(100));
 		Assert.assertEquals(expectedAccount.getStatementRecords().get(0).getOperation().getDateOfOperation(),
 				dateOfDeposit);
-	
 
 		final BigDecimal moneyToWithdrawn = BigDecimal.valueOf(50);
 		final LocalDate dateOfWithdrawn = LocalDate.parse("2017-02-01");

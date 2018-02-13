@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import com.kata.bank.exception.BankAccountException;
-import com.kata.bank.model.Account;
-import com.kata.bank.model.DepositOperation;
-import com.kata.bank.model.StatementRecord;
-import com.kata.bank.model.TypeOperation;
-import com.kata.bank.model.WithdrawnOperation;
+import com.kata.bank.model.account.Account;
+import com.kata.bank.model.operation.DepositOperation;
+import com.kata.bank.model.operation.TypeOperation;
+import com.kata.bank.model.operation.WithdrawnOperation;
+import com.kata.bank.model.statement.StatementRecord;
 import com.kata.bank.service.AccountService;
 
 /**
@@ -27,8 +27,7 @@ public class AccountServiceImpl implements AccountService {
 	 */
 	public Account deposit(Account account, LocalDate dateOfOperation, BigDecimal moneyOfDeposit) {
 
-		DepositOperation depositOperation = new DepositOperation(moneyOfDeposit, TypeOperation.DEPOSIT,
-				dateOfOperation);
+		DepositOperation depositOperation = new DepositOperation(moneyOfDeposit, dateOfOperation);
 
 		BigDecimal actualBalance = account.getBalance().add(moneyOfDeposit);
 		account.setBalance(actualBalance);
@@ -47,8 +46,7 @@ public class AccountServiceImpl implements AccountService {
 	 */
 	public Account withdrawn(Account account, LocalDate dateOfOperation, BigDecimal moneyToWithdrawn) {
 
-		WithdrawnOperation withdrawnOperation = new WithdrawnOperation(moneyToWithdrawn, TypeOperation.WITHDRAWN,
-				dateOfOperation);
+		WithdrawnOperation withdrawnOperation = new WithdrawnOperation(moneyToWithdrawn, dateOfOperation);
 
 		if (moneyToWithdrawn.compareTo(LIMIT_OF_WITHDRAWN) > 0)
 			throw new BankAccountException("The amount is not allowed – it is beyond the authorized limit of "

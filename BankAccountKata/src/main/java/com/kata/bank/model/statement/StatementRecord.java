@@ -1,6 +1,9 @@
-package com.kata.bank.model;
+package com.kata.bank.model.statement;
 
 import java.math.BigDecimal;
+
+import com.kata.bank.model.operation.Operation;
+import com.kata.bank.model.operation.TypeOperation;
 
 /**
  * The Class StatementRecord represents the statement record.

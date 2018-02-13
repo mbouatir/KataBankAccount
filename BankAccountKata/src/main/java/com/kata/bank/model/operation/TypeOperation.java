@@ -1,4 +1,4 @@
-package com.kata.bank.model;
+package com.kata.bank.model.operation;
 
  
 /**

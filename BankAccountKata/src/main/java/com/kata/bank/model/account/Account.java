@@ -1,9 +1,11 @@
-package com.kata.bank.model;
+package com.kata.bank.model.account;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.kata.bank.model.statement.StatementRecord;
 
 /**
  * The Class Account that represents the account bank.

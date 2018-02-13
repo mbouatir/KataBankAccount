@@ -1,4 +1,4 @@
-package com.kata.bank.model;
+package com.kata.bank.model.operation;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
